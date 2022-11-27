@@ -100,6 +100,9 @@ def ExtDisplay():
 @app.route('/api/nextbid/<seq>')
 def nextbid(seq):
     mybid = robot_bid(seq)
+
+#coming soon
+
     return mybid
 
 
