@@ -1,13 +1,15 @@
+from gevent import monkey
+monkey.patch_all()
 import shelve
 import json
 import csv
 from bottle import Bottle, run, static_file, redirect, template, request
-from gevent import monkey
+
 from scoring import score
 from TCGUtils import MatchPoint, deal_data, BBOURL, TCGDisplay
 #For Bid API
 from BotNextBid import robot_bid
-monkey.patch_all()
+
 
 app = Bottle()
 
