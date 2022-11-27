@@ -1,22 +1,13 @@
-from gevent import monkey
-monkey.patch_all()
-
-from bottle import Bottle, run, static_file, redirect, template, request
-
 import shelve
 import json
 import csv
+from bottle import Bottle, run, static_file, redirect, template, request
+from gevent import monkey
 from scoring import score
 from TCGUtils import MatchPoint, deal_data, BBOURL, TCGDisplay
-
 #For Bid API
 from BotNextBid import robot_bid
-# from urllib import parse
-# from nn.models import Models
-# from bots import BotBid
-# from bidding import bidding
-# from util import hand_to_str
-# from TCGUtils import robot_bid
+monkey.patch_all()
 
 app = Bottle()
 
@@ -41,12 +32,12 @@ def home():
 
 @app.route('/app/<filename>')
 def frontend(filename):
-	url = filename
+    url = filename
  
-	if '?' in filename:
-		filename = filename[:filename.index('?')]
-	
-	return static_file(filename, root='./frontend')
+    if '?' in filename:
+        filename = filename[:filename.index('?')]
+
+    return static_file(filename, root='./frontend')
 
 @app.route('/api/deals/<deal_id>')
 def deal_data(deal_id):
@@ -65,28 +56,28 @@ def delete_deal(deal_id):
     
 @app.route('/redeal/<deal>')
 def re_deal(deal):
-	
+
     #Use template to load Deal into redeal.tpl(aka bridge.html) skip the .js and css calls
     if 'style' in deal:
-    	deal = deal[deal.index('style'):]
-    	return static_file(deal, root='./frontend')
+        deal = deal[deal.index('style'):]
+        return static_file(deal, root='./frontend')
     elif 'bridge.js'	in deal:
-    	deal = deal[deal.index('bridge.js'):]
-    	return static_file(deal, root='./frontend')
+        deal = deal[deal.index('bridge.js'):]
+        return static_file(deal, root='./frontend')
     else:	
-    	return template('./frontend/redeal/redeal' ,  redeal= deal)
+        return template('./frontend/redeal/redeal' ,  redeal= deal)
 
 @app.route('/home')
 def ExtDisplay():
-	client_ip = request.environ.get('REMOTE_ADDR')
-	html = TCGDisplay(client_ip)
-	return html
-	
+    client_ip = request.environ.get('REMOTE_ADDR')
+    html = TCGDisplay(client_ip)
+    return html
+
 @app.route('/admin')
 def ExtDisplay():
-	client_ip = request.environ.get('REMOTE_ADDR')
-	html = TCGDisplay('admin')
-	return html
+    client_ip = request.environ.get('REMOTE_ADDR')
+    html = TCGDisplay('admin')
+    return html
 
 #Robot Next Bid API
 @app.route('/api/nextbid/<seq>')
