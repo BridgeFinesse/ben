@@ -2,9 +2,12 @@ import numpy as np
 import sample
 import bots
 import deck52
+import datetime
+
 
 from bidding import bidding
 from objects import BidResp, Card, CardResp
+
 
 class CardByCard:
 
@@ -52,12 +55,17 @@ class CardByCard:
         qualifier = '.'
         best_tricks = card_resp.candidates[0].expected_tricks
         for candidate in card_resp.candidates:
+
+
             if candidate.card.symbol() == card:
                 if best_tricks - candidate.expected_tricks > 0.1:
                     qualifier = '?'
                 if best_tricks - candidate.expected_tricks > 0.6:
                     qualifier = '??'
-        print(f'{card} {qualifier}')
+            else:
+                qualifier = 'X'
+
+        print(f'{card} {qualifier} {card_resp.candidates[0].card}')
 
     def analyze_opening_lead(self):
         contract = bidding.get_contract(self.padded_auction)
@@ -73,6 +81,7 @@ class CardByCard:
         self.cards[card_resp.card.symbol()] = card_resp
 
     def analyze_play(self):
+        print('Start analyze play: ', datetime.datetime.now())
         contract = bidding.get_contract(self.padded_auction)
         
         level = int(contract[0])
@@ -119,7 +128,7 @@ class CardByCard:
                 
                 rollout_states = None
                 if isinstance(card_players[player_i], bots.CardPlayer):
-                    rollout_states = sample.init_rollout_states(trick_i, player_i, card_players, player_cards_played, shown_out_suits, current_trick, 200, self.padded_auction, card_players[player_i].hand.reshape((-1, 32)), self.vuln, self.models)
+                    rollout_states = sample.init_rollout_states(trick_i, player_i, card_players, player_cards_played, shown_out_suits, current_trick, 50, self.padded_auction, card_players[player_i].hand.reshape((-1, 32)), self.vuln, self.models)
 
                 card_resp = card_players[player_i].play_card(trick_i, leader_i, current_trick52, rollout_states)
 
@@ -127,11 +136,19 @@ class CardByCard:
                 self.card_responses.append(card_resp)
                 self.cards[self.play[card_i]] = card_resp
 
-                type(self).card_eval(self.play[card_i], card_resp)
+                #type(self).card_eval(self.play[card_i], card_resp)
+
+                if card_i == len(self.play)-1:
+                    #type(self).card_eval(self.play[card_i], card_resp)
+                    print(self.play[card_i])
+                else:
+                    print(self.play[card_i])
+
 
                 card_i += 1
                 if card_i >= len(self.play):
-                    return
+                    print('End analyze play: ', datetime.datetime.now())
+                    return card_resp.candidates[0].card  ##J3 Best Card??
                 
                 card52 = card_resp.card.code()
                 card = deck52.card52to32(card52)
