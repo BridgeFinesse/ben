@@ -101,7 +101,7 @@ def ExtDisplay():
 def nextbid(seq):
     mybid = robot_bid(seq)
 
-#coming soon
+    #coming soon
 
     return mybid
 
