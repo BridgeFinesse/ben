@@ -4,10 +4,8 @@ import bots
 import deck52
 import datetime
 
-
 from bidding import bidding
 from objects import BidResp, Card, CardResp
-
 
 class CardByCard:
 

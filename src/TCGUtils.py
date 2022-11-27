@@ -15,11 +15,8 @@ from bidding import bidding
 from util import hand_to_str
 
 DB_NAME = 'gamedb'
-#public_ip = requests.get("http://wtfismyip.com/text").text
-#if (public_ip == '2601:246:cb00:fd0:c896:89f5:17c1:843b') or (public_ip == '24.1.254.247'):  ##J3
-	#public_ip ='localhost'
 public_ip = requests.get("https://api.ipify.org").text
-if (public_ip in ['189.176.87.30','24.1.254.247']): ##sue,jay macbooks
+if (public_ip in ['189.176.87.30', '24.1.254.247']): ##sue,jay macbooks
 	public_ip = "127.0.0.1"
 
 def deal_data(deal_id):
@@ -229,8 +226,6 @@ def TCGDisplay(client_ip):
 			#Generate Robot Rebid link
 			#http://34.195.157.55:8080/redeal/Q653.K985.964.T8 A.AJ2.AJ75.AQJ64 T98742.74.QT.K92 KJ.QT63.K832.753|N Both
 			#html += '<td>&nbsp;&nbsp;&nbsp;<a href="http://34.195.157.55:8080/redeal/{}|{} {}">Rebid</a></td>'.format((deal['hands']),dealer,dealvul)
-			
-			
 			html += '<td>&nbsp;&nbsp;&nbsp;<a href="http://{}:8080/redeal/{}|{} {}">Rebid</a></td>'.format(public_ip,(deal['hands']),dealer,dealvul)
 
 			
@@ -331,5 +326,3 @@ def robot_bid(seq) :
 	mybid = bot_bid.bid(['PAD_START', '1D', '1S']).bid
 	
 	return mybid
-	
-	
