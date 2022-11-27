@@ -2,3 +2,13 @@
 __pycache__
 src/gamedb.*
 
+bin/libdds_nov_21_2022.so
+bin/libdds_org.so
+src/frontend/TCGDisplay.html
+src/frontend/bridgeOriginal.html
+.idea/ben.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/inspectionProfiles/profiles_settings.xml
