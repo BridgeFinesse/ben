@@ -1,8 +1,6 @@
-conda create -n ben python=3.7
+#conda create -n ourben python=3.8
+#conda activate ourben
 
-conda activate ben
-
-conda install numpy
 conda install scipy
 conda install matplotlib
 conda install jupyter
@@ -10,12 +8,11 @@ conda install scikit-learn
 conda install pandas
 
 pip install tqdm
-
 pip install websockets
-
-pip install tensorflow==1.15
-pip install grpcio-tools
 
 pip install bottle
 pip install gevent
 
+conda install -c apple tensorflow-deps==2.9.0
+pip install tensorflow-macos==2.9.0
+pip install tensorflow-metal==0.5.0
