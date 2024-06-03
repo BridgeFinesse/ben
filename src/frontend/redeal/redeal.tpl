@@ -109,7 +109,7 @@
     <script type="text/javascript">
         console.log('starting')
 
-        var ws = new WebSocket("ws://" + location.hostname + ":4443/blahblah")
+        var ws = new WebSocket("ws://" + location.hostname + ":4443/{{redeal}}")
 		
         var deal = undefined
 

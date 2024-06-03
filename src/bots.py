@@ -16,7 +16,6 @@ from bidding.binary import parse_hand_f
 
 from util import hand_to_str, expected_tricks, p_make_contract
 
-
 class BotBid:
 
     def __init__(self, vuln, hand_str, models):

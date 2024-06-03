@@ -3,7 +3,8 @@ sys.path.append('../../../src')
 
 import os.path
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
     ##np.save(os.path.join(out_dir, 'X.npy'), X)
 
@@ -121,4 +122,3 @@ with tf.Session() as sess:
         sess.run(train_step, feed_dict={seq_in: x_batch, seq_out_hcp: hcp_batch, seq_out_shape: shape_batch, keep_prob: 0.8})
 
     saver.save(sess, model_path, global_step=n_iterations)
-    

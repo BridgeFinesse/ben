@@ -7,7 +7,6 @@ from util import hand_to_str, parse_lin, display_lin
 from bots import BotLead
 from analysis import CardByCard
 
-
 def robot_bid(seq) :
 	
 	#BBO API: http://34.195.157.55:8080/api/nextbid/pov="E" d="N" v="-" n="q842.j862.97.q93" s="aj.a93.akt632.k8" e="k.qt75.j854.a754" w="t97653.k4.q.jt62" h="p-p-1d-p-1h-p-2d-p-p-p
